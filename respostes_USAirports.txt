@@ -1,0 +1,17 @@
+1. select count(*) from flights;
+
+2. select Origin, avg(ArrDelay) as prom_Arribades, avg(DepDelay) as prom_Sortides from Flights where Origin in (select iata from USAirports join Flights on Flights.Origin=USAirports.IATA) group by Origin;
+
+3. select Origin, colYear, colMonth, avg(ArrDelay) as prom_Arribades from Flights where Origin in (select iata from USAirports join Flights on Flights.Origin=USAirports.IATA) group by Origin, colYear, colMonth order by Origin, colYear asc, colMonth asc;
+
+4. select USAirports.City, colYear, colMonth, avg(ArrDelay) as prom_Arribades from Flights join USAirports on USAirports.IATA=Flights.Origin where Origin in (select iata from USAirports join Flights on Flights.Origin=USAirports.IATA) group by USAirports.City, colYear, colMonth order by USAirports.City, colYear asc, colMonth asc;
+
+5. select UniqueCarrier, colyear, colMonth, sum(Cancelled) as total_cancelled from Flights join Carriers on Carriers.CarrierCode=Flights.UniqueCarrier group by UniqueCarrier, colYear, colMonth having total_cancelled>=1 order by total_cancelled desc, colYear asc, colMonth asc;
+
+6. select TailNum, sum(Flights.Distance) as totalDistance from Flights where TailNum!=" " group by Flights.TailNum order by totalDistance desc limit 10;
+
+7. SELECT UniqueCarrier, avg(ArrDelay) as avgDelay FROM Flights group by UniqueCarrier having avgDelay>=10 order by avgDelay desc;
+
+
+
+
